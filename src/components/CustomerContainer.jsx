@@ -1,6 +1,6 @@
 function CustomerContainer() {
   return (
-    <section className="w-full p-4 bg-cream-200">
+    <section className="w-full px-4 py-2 bg-cream-200">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-4">
         <CustomerCard />
         <CustomerCard />
@@ -43,7 +43,7 @@ function CustomerCard() {
             Qameez
           </h2>
           <table className="mt-1 w-full">
-            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-maroon-600/80 *:py-1 *:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-cream-100 *:border *:border-cream-300">
+            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-maroon-600/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-cream-100 *:border *:border-cream-300">
               <tr>
                 <td>Qameez Length
                   <span className="urdu" dir="rtl">(لمبائی) </span>:
@@ -131,7 +131,7 @@ function CustomerCard() {
             Shalwar
           </h2>
           <table className="mt-1 w-full">
-            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-maroon-600/80 *:py-1 *:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-cream-100 *:border *:border-cream-300">
+            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-maroon-600/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-cream-100 *:border *:border-cream-300">
               <tr>
                 <td>Shalwar Length
                   <span className="urdu" dir="rtl">(لمبائی) </span>:
@@ -161,13 +161,23 @@ function CustomerCard() {
         </div>
 
         {/* Note */}
-        <div className="p-4 sm:row-start-2 sm:col-start-2 border border-gold-500 rounded-lg">
-          <h2 className="text-xs text-gold-600 uppercase font-semibold">
-            Special Notes / Instructions
-          </h2>
-          <p className="mt-2 text-sm italic">
-            "Round cuff buttons, light stiffening on collar."
-          </p>
+        <div className="py-4 space-y-2">
+          <div className="flex gap-1">
+            <p className="px-4 py-1 text-sm text-maroon-700/80 font-semibold bg-gold-100 border border-gold-300 rounded">
+              Maghzi
+            </p>
+            <p className="px-4 py-1 text-sm text-maroon-700/80 font-semibold bg-cream-200 border border-cream-300 rounded">
+              Loose Fit
+            </p>
+          </div>
+          <div className="p-4 sm:row-start-2 sm:col-start-2 border border-gold-500 rounded-lg">
+            <h2 className="text-xs text-gold-600 uppercase font-semibold">
+              Special Notes / Instructions
+            </h2>
+            <p className="mt-2 text-sm italic">
+              "Round cuff buttons, light stiffening on collar."
+            </p>
+          </div>
         </div>
       </div>
 

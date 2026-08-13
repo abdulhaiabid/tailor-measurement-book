@@ -1,6 +1,6 @@
 function Searchbar() {
   return (
-    <section className="p-4 bg-cream-200">
+    <section className="px-4 py-2 pt-4 bg-cream-200">
       <div className="max-w-7xl mx-auto p-4 flex flex-col gap-3 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] borderborder-gold-300 rounded-xl">
         {/* Search bar */}
         <div className="relative">
