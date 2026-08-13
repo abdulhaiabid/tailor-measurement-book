@@ -1,6 +1,0 @@
-{
-  "name": "Tailor's Measurement Book",
-  "description": "A measurement management system for tailors to easily record, edit, search, and manage customer measurements.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
