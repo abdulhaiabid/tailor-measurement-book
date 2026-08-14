@@ -1,6 +1,6 @@
 function CustomerContainer() {
   return (
-    <section className="w-full px-4 py-2 bg-cream-200">
+    <section className="w-full px-4 py-2 bg-bg-low">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-4">
         <CustomerCard />
         <CustomerCard />
@@ -13,37 +13,37 @@ function CustomerContainer() {
 
 function CustomerCard() {
   return (
-    <div className="bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl overflow-hidden">
+    <div className="col-span-1 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl overflow-hidden">
       {/* Name, Phone and added date */}
-      <div className="p-4 flex justify-between items-start bg-cream-100 ">
+      <div className="p-4 flex justify-between items-start bg-bg-mid">
         <div>
-          <h1 className="text-xl text-maroon-700 font-bold">
+          <h1 className="text-xl text-text-light font-bold">
             Chaudhry Usman Khan
           </h1>
-          <p className="mt-0.5 flex items-center gap-1 text-sm text-maroon-700/70 font-medium">
-            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! text-gold-600 leading-4 select-none">
+          <p className="mt-0.5 flex items-center gap-1 text-sm text-text-light/70 font-medium">
+            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! text-accent-light leading-4 select-none">
               call
             </span>
             0300-99876543
           </p>
         </div>
-        <p className="px-2 py-1 text-[0.6rem] xs:text-xs text-maroon-700/70 text-nowrap font-medium xs:font-normal bg-cream-200 border border-cream-300 rounded-lg">
+        <p className="px-2 py-1 text-[0.6rem] xs:text-xs text-text-light/90 text-nowrap font-semibold xs:font-medium bg-accent-light/20 border border-accent-light/60 rounded-lg">
           10 Aug 2026
         </p>
       </div>
 
       {/* Measurements */}
-      <div className="flexflex-colsm:flex-rowsm:justify-evenly p-4 grid sm:grid-rows-2 grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4 border-y-2 border-cream-300">
+      <div className="p-4 grid sm:grid-rows-2 grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4 border-y-2 border-accent-dark/20">
         {/* Qameez */}
         <div className="sm:row-span-2 flex-1">
-          <h2 className="flex items-center gap-1 text-base xs:text-lg text-maroon-700 uppercase font-bold">
-            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! text-gold-500 select-none">
+          <h2 className="flex items-center gap-1 text-base xs:text-lg text-text-light uppercase font-bold">
+            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! text-accent-light select-none">
               apparel
             </span>
             Qameez
           </h2>
           <table className="mt-1 w-full">
-            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-maroon-600/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-cream-100 *:border *:border-cream-300">
+            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-text-muted/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-bg-mid *:border *:border-accent-dark/20">
               <tr>
                 <td>Qameez Length
                   <span className="urdu" dir="rtl">(لمبائی) </span>:
@@ -124,14 +124,14 @@ function CustomerCard() {
 
         {/* Shalwar */}
         <div className="sm:px-0 sm:row-span-1 flex-1">
-          <h2 className="flex items-center gap-1 text-base xs:text-lg text-maroon-700 uppercase font-bold">
-            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! text-gold-500 select-none">
+          <h2 className="flex items-center gap-1 text-base xs:text-lg text-text-light uppercase font-bold">
+            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! text-accent-light select-none">
               apparel
             </span>
             Shalwar
           </h2>
           <table className="mt-1 w-full">
-            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-maroon-600/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-cream-100 *:border *:border-cream-300">
+            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-text-muted/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-bg-mid *:border *:border-accent-dark/20">
               <tr>
                 <td>Shalwar Length
                   <span className="urdu" dir="rtl">(لمبائی) </span>:
@@ -160,30 +160,29 @@ function CustomerCard() {
           </table>
         </div>
 
-        {/* Note */}
-        <div className="py-4 space-y-2">
-          <div className="flex gap-1">
-            <p className="px-4 py-1 text-sm text-maroon-700/80 font-semibold bg-gold-100 border border-gold-300 rounded">
+        {/* Instructions */}
+        <div className="p-4 sm:row-start-2 sm:col-start-2 flex flex-col border border-accent-light/80 rounded-lg">
+          <h2 className="text-xs text-accent-light uppercase font-bold">
+            Instructions
+          </h2>
+          <p className="mt-2 flex-1 text-sm italic">
+            "Round cuff buttons, light stiffening on collar."
+          </p>
+          <div className="mt-4 flex items-center gap-1">
+            <p className="px-4 py-1 text-xs text-text-light/80 font-semibold bg-accent-light/10 border border-accent-light/40 rounded">
               Maghzi
             </p>
-            <p className="px-4 py-1 text-sm text-maroon-700/80 font-semibold bg-cream-200 border border-cream-300 rounded">
+            <p className="px-4 py-1 text-xs text-text-light/80 font-semibold bg-accent-dark/5 border border-accent-dark/16 rounded">
               Loose Fit
             </p>
           </div>
-          <div className="p-4 sm:row-start-2 sm:col-start-2 border border-gold-500 rounded-lg">
-            <h2 className="text-xs text-gold-600 uppercase font-semibold">
-              Special Notes / Instructions
-            </h2>
-            <p className="mt-2 text-sm italic">
-              "Round cuff buttons, light stiffening on collar."
-            </p>
-          </div>
         </div>
+
       </div>
 
       {/* Receipt, Edit and Delete Button */}
-      <div className="p-4 flex justify-between items-center bg-cream-100">
-        <button className="px-4 py-1 flex items-center gap-1 text-maroon-700 font-semibold bg-gold-400 rounded-lg transition-colors duration-300 cursor-pointer hover:bg-gold-500">
+      <div className="p-4 flex justify-between items-center bg-bg-mid">
+        <button className="px-4 py-1 flex items-center gap-1 text-text-light font-semibold bg-accent-light brightness-110 rounded-lg transition-[filter] duration-300 cursor-pointer hover:brightness-104">
           <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! select-none">
             receipt
           </span>
@@ -192,18 +191,18 @@ function CustomerCard() {
 
         <div className="flex items-end gap-2">
           <button className="flex justify-center items-center cursor-pointer">
-            <span className="material-symbols-outlined leading-2 font-normal! select-none">
+            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-normal! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/10">
               edit
             </span>
           </button>
           <button className="flex justify-center items-center cursor-pointer">
-            <span className="material-symbols-outlined leading-2 font-normal! select-none">
+            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-normal! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/10">
               delete
             </span>
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

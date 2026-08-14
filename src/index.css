@@ -22,63 +22,105 @@
     color: #2d080e;
     background-color: #fbf7ef;
   }
+
+  #modal-container {
+    position: relative;
+  }
+
+    /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f5efe3;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #800020;
+  }
 }
 :root {
-  --maroon-50: #fdf2f4;
-  --maroon-100: #fbe5e8;
-  --maroon-200: #f7ced5;
-  --maroon-300: #f0aa9f;
-  --maroon-600: #9b1c2e;
-  --maroon-700: #800020;
-  --maroon-800: #610018;
-  --maroon-900: #4a0e17;
-  --maroon-950: #2d080e;
+  --custom-maroon-50: #fdf2f4;
+  --custom-maroon-100: #fbe5e8;
+  --custom-maroon-200: #f7ced5;
+  --custom-maroon-300: #f0aa9f;
+  --custom-maroon-600: #9b1c2e;
+  --custom-maroon-700: #800020;
+  --custom-maroon-800: #610018;
+  --custom-maroon-900: #4a0e17;
+  --custom-maroon-950: #2d080e;
 
-  --gold-100: #fdf8e6;
-  --gold-200: #f9eebe;
-  --gold-300: #f4e292;
-  --gold-400: #ebd15b;
-  --gold-500: #d4af37;
-  --gold-600: #b88e1e;
-  --gold-700: #916c10;
+  --custom-gold-100: #fdf8e6;
+  --custom-gold-200: #f9eebe;
+  --custom-gold-300: #f4e292;
+  --custom-gold-400: #ebd15b;
+  --custom-gold-500: #d4af37;
+  --custom-gold-600: #b88e1e;
+  --custom-gold-700: #916c10;
 
-  --cream-50: #fdfbf7;
-  --cream-100: #fbf7ef;
-  --cream-200: #f5efe3;
-  --cream-300: #eae0d0;
-  --cream-400: #d8c8b2;
+  --custom-cream-50: #fdfbf7;
+  --custom-cream-100: #fbf7ef;
+  --custom-cream-200: #f5efe3;
+  --custom-cream-300: #eae0d0;
+  --custom-cream-400: #d8c8b2;
 
-  --text: #2d080e;
-  --bg: #fbf7ef;
+  --custom-text: #2d080e;
+  --custom-bg: #fbf7ef;
+
+  --accent-light: #d4af37;
+  --accent-dark: #4a0e17;
+
+  --text-light: #800020;
+  --text-dark: #4a0e17;
+  --text-muted: #9b1c2e;
+
+  --bg-high: #fdfbf7;
+  --bg-mid: #fbf7ef;
+  --bg-low: #f5efe3;
 }
 
 @theme inline {
-  --color-maroon-50: var(--);
-  --color-maroon-100: var(--maron-100);
-  --color-maroon-200: var(--maron-200);
-  --color-maroon-300: var(--maron-300);
-  --color-maroon-600: var(--maron-600);
-  --color-maroon-700: var(--maron-700);
-  --color-maroon-800: var(--maron-800);
-  --color-maroon-900: var(--maron-900);
-  --color-maroon-950: var(--maron-950);
+  --color-custom-maroon-50: var(--custom-maron-50);
+  --color-custom-maroon-100: var(--custom-maron-100);
+  --color-custom-maroon-200: var(--custom-maron-200);
+  --color-custom-maroon-300: var(--custom-maron-300);
+  --color-custom-maroon-600: var(--custom-maron-600);
+  --color-custom-maroon-700: var(--custom-maron-700);
+  --color-custom-maroon-800: var(--custom-maron-800);
+  --color-custom-maroon-900: var(--custom-maron-900);
+  --color-custom-maroon-950: var(--custom-maron-950);
 
-  --color-gold-100: var(--color-gold-100);
-  --color-gold-200: var(--color-gold-200);
-  --color-gold-300: var(--color-gold-300);
-  --color-gold-400: var(--color-gold-400);
-  --color-gold-500: var(--color-gold-500);
-  --color-gold-600: var(--color-gold-600);
-  --color-gold-700: var(--color-gold-700);
+  --color-custom-gold-100: var(--custom-gold-100);
+  --color-custom-gold-200: var(--custom-gold-200);
+  --color-custom-gold-300: var(--custom-gold-300);
+  --color-custom-gold-400: var(--custom-gold-400);
+  --color-custom-gold-500: var(--custom-gold-500);
+  --color-custom-gold-600: var(--custom-gold-600);
+  --color-custom-gold-700: var(--custom-gold-700);
 
-  --color-cream-50 : var(--cream-50);
-  --color-cream-100: var(--cream-100);
-  --color-cream-200: var(--cream-200);
-  --color-cream-300: var(--cream-300);
-  --color-cream-400: var(--cream-400);
+  --color-custom-cream-50 : var(--custom-cream-50);
+  --color-custom-cream-100: var(--custom-cream-100);
+  --color-custom-cream-200: var(--custom-cream-200);
+  --color-custom-cream-300: var(--custom-cream-300);
+  --color-custom-cream-400: var(--custom-cream-400);
 
-  --color-text: var(--text);
-  --color-bg: var(--bg);
+  --color-custom-text: var(--custom-text);
+  --color-custom-bg: var(--custom-bg);
+
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
+
+  --color-text-light: var(--text-light);
+  --color-text-dark: var(--text-dark);
+  --color-text-muted: var(--text-muted);
+
+  --color-bg-high: var(--bg-high);
+  --color-bg-mid: var(--bg-mid);
+  --color-bg-low: var(--bg-low);
 
   --breakpoint-xs: 425px;
 }

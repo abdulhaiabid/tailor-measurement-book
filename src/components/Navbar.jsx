@@ -1,9 +1,18 @@
+import { useState } from "react";
+import AddCustomerDialog from "./AddCustomerDialog";
+
 function Navbar() {
+  const [isAddCustomerDialogOpen, setIsAddCustomerDialogOpen] = useState(true);
+
+  function onAddCustomerDialogClose() {
+    setIsAddCustomerDialogOpen(false);
+  }
+
   return (
-    <header className="w-full px-4 py-1 text-gold-300 bg-maroon-900 border-b-4 border-gold-500">
+    <header className="w-full px-4 py-1 text-accent-light bg-accent-dark border-b-4 border-accent-light">
       <nav className="max-w-7xl mx-auto py-2 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
         <div className="flex items-center gap-2">
-          <div className="p-2 flex justify-center items-center text-maroon-900 bg-gold-500 rounded-xl">
+          <div className="p-2 flex justify-center items-center text-accent-dark bg-accent-light rounded-xl">
             <span className="material-symbols-outlined select-none">
               content_cut
             </span>
@@ -12,18 +21,24 @@ function Navbar() {
             <h1 className="text-base sm:text-xl font-bold">
               Tailor's Measurement Book
             </h1>
-            <p className="text-xs text-gold-100/70">
+            <p className="text-xs text-bg-low/70">
               Smart Customer Measurement System
             </p>
           </div>
         </div>
 
-        <button className="px-3 py-1 sm:py-1 flex justify-center items-center text-sm text-maroon-900 font-semibold bg-gold-500 rounded-lg cursor-pointer">
+        <button
+          onClick={() => setIsAddCustomerDialogOpen(true)}
+          className="px-3 py-1 sm:py-1 flex justify-center items-center text-sm text-accent-dark font-semibold bg-accent-light rounded-lg transition-colors duration-300 cursor-pointer hover:bg-accent-light/80">
           <span className="material-symbols-outlined text-xl! select-none">
             add
           </span>
           Add Customer
         </button>
+        <AddCustomerDialog
+          isOpen={isAddCustomerDialogOpen}
+          onClose={onAddCustomerDialogClose}>
+        </AddCustomerDialog>
       </nav>
     </header>
   );
