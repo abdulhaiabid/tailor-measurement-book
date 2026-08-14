@@ -45,6 +45,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
             <span className="material-symbols-outlined p-2  text-white select-none">close</span>
           </button>
         </div>
+
         <div className="p-4 space-y-4 text-text-dark bg-bg-low overflow-y-auto">
           {/* Customer Information */}
           <div className="p-4 bg-bg-mid shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-lg">
@@ -71,7 +72,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                   id="name-input"
                   type="text"
                   placeholder="e.g. Ali"
-                  className="px-2 py-2 text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent placeholder:text-sm" />
+                  className="px-2 py-1.5 text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent placeholder:text-sm" />
               </div>
 
               <div className="flex flex-col space-y-1">
@@ -89,7 +90,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                   id="phone-number-input"
                   type="text"
                   placeholder="e.g. 0312-3456789"
-                  className="px-2 py-2 text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent placeholder:text-sm" />
+                  className="px-2 py-1.5 text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent placeholder:text-sm" />
               </div>
             </div>
 
@@ -104,7 +105,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Qameez Measurements *
             </h2>
 
-            <div className="mt-4 space-y-2 grid grid-cols-2 gap-x-2">
+            <div className="mt-4 grid grid-cols-2 gap-2">
               <NumberField
                 titleEN={"Qameez Length"}
                 titleUR={"لمبائی"}
@@ -154,7 +155,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Shalwar Measurements *
             </h2>
 
-            <div className="mt-4 space-y-2 grid grid-cols-2 gap-x-2">
+            <div className="mt-4 grid grid-cols-2 align-items-end gap-2">
               <NumberField
                 titleEN={"Shalwar Length"}
                 titleUR={"لمبائی"}
@@ -166,10 +167,6 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               <NumberField
                 titleEN={"Ghera / Circumference"}
                 titleUR={"گھیرہ"}
-              />
-              <NumberField
-                titleEN={"Neck"}
-                titleUR={"گلا"}
               />
               <NumberField
                 titleEN={"Rise / Aasan"}
@@ -187,10 +184,10 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Fitting Options & Extra Notes *
             </h2>
 
-            <div className="mt-4 space-y-2 gridgrid-cols-2gap-x-2">
+            <div className="mt-4 space-y-2 grid grid-cols-1 gap-2">
               <div className="flex flex-col space-y-1">
                 <label
-                  htmlFor="qameez-length-input"
+                  htmlFor="collar-style"
                   className="text-xs font-medium">
                   Collar / Gala Style
                   <span
@@ -199,31 +196,127 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                     (گلا)
                   </span>
                 </label>
-                <div className="w-full flex items-center text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
-                  <input
-                    id="qameez-length-input"
-                    type="number"
-                    step="0.2"
-                    placeholder="0.0"
-                    className="w-full pl-2 py-1.5 bg-bg-high outline-none placeholder:font-semibold" />
-                  <label
-                    htmlFor="qameez-length-input"
-                    className="pr-2 pl-1 font-medium select-none">in</label>
-                </div>
+
+                <select
+                  name="collar-style"
+                  id="collar-style"
+                  className="w-full px-1 py-1.5 flex items-center text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
+                  {/* <option value="" disabled selected>
+                    Select an option
+                  </option> */}
+                  <option value="ban-collar">
+                    Ban Collar
+                    <span
+                      dir="rtl"
+                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                      (بین گلا)
+                    </span>
+                  </option>
+                  <option value="shirt-collar">
+                    Shirt Collar
+                    <span
+                      dir="rtl"
+                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                      (شرٹ کالر)
+                    </span>
+                  </option>
+                  <option value="maghzi-collar">
+                    Maghzi Collar
+                    <span
+                      dir="rtl"
+                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                      (مغزی کالر)
+                    </span>
+                  </option>
+                </select>
+              </div>
+
+              <div className="flex flex-col space-y-1">
+                <label
+                  htmlFor="fitting-preference"
+                  className="text-xs font-medium">
+                  Fitting Preference
+                  <span
+                    dir="rtl"
+                    className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                    (فٹنگ)
+                  </span>
+                </label>
+
+                <select
+                  name="fitting-preference"
+                  id="fitting-preference"
+                  className="w-full px-1 py-1.5 flex items-center text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
+                  <option value="normal-fit">
+                    Normal / Regular Fit
+                    <span
+                      dir="rtl"
+                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                      (مناسب فٹنگ)
+                    </span>
+                  </option>
+                  <option value="slim-fit">
+                    Slim Fit
+                    <span
+                      dir="rtl"
+                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                      (تنگ فٹنگ)
+                    </span>
+                  </option>
+                  <option value="loose-fit">
+                    Loose / Traditional Fit
+                    <span
+                      dir="rtl"
+                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                      (کھلی فٹنگ)
+                    </span>
+                  </option>
+                </select>
+              </div>
+
+              <div className="flex flex-col space-y-1">
+                <label
+                  htmlFor="instructions"
+                  className="text-xs font-medium">
+                  Instructions
+                  <span
+                    dir="rtl"
+                    className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
+                    (فٹنگ)
+                  </span>
+                </label>
+
+                <textarea
+                  name="instructions"
+                  id="instructions"
+                  rows="4"
+                  placeholder="e.g. Side zipper pocket on right, double stitching on collar, round cuff buttons..."
+                  className="px-2 py-2 text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent"></textarea>
               </div>
             </div>
           </div>
         </div>
-      </dialog >
+
+        {/* Saving Options */}
+        <div className="px-4 py-3 flex justify-end items-center gap-2 bg-bg-low shadow-[0_0_8px_0_rgba(0,0,0,0.4)] border-t-4 border-bg-low">
+          <button className="px-6 py-1.5 flex justify-center items-center gap-1 text-text-light font-semibold bg-accent-light brightness-110 rounded-lg transition-[filter] duration-300 cursor-pointer hover:brightness-104">
+            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! select-none">
+              receipt
+            </span>
+            Save
+          </button>
+        </div>
+
+      </dialog>
     </>
     , document.querySelector("#modal-container"));
 }
 
 function NumberField({ titleEN, titleUR }) {
   return (
-    <div className="flex flex-col space-y-1">
+    <div className="space-y-1 flex flex-col justify-end">
       <label
-        htmlFor="qameez-length-input"
+        htmlFor="collar-style"
         className="text-xs font-medium">
         {titleEN}
         <span
