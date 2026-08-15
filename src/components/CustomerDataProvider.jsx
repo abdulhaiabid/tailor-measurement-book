@@ -36,7 +36,7 @@ function CustomerDataProvider({ children }) {
   const [customers, setCustomers] = useState(() => {
     const savedCustomers = localStorage.getItem("customers");
 
-    return savedCustomers !== null
+    return savedCustomers === null
       ? JSON.parse(savedCustomers)
       : [
         {

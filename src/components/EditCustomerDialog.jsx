@@ -161,7 +161,7 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
       </div>
       <dialog
         open={isOpen}
-        className={`h-[90dvh] w-[90%] mx-4 top-1/2 left-1/2 -translate-1/2 flex flex-col shadow-[0_0_18px_0_rgba(0,0,0,0.2)] border-2 border-accent-light rounded-xl transition-[display,opacity] transition-discrete duration-300 overflow-hidden ${isOpen ? "fixed inset-0 opacity-100 " : "opacity-0 hidden"}`}>
+        className={`h-[90%] w-[90%] top-1/2 left-1/2 -translate-1/2 flex flex-col shadow-[0_0_18px_0_rgba(0,0,0,0.2)] border-2 border-accent-light rounded-xl transition-[display,opacity] transition-discrete duration-300 overflow-hidden ${isOpen ? "fixed inset-0 opacity-100" : "opacity-0 hidden"}`}>
         <div className="p-4 flex justify-between items-center bg-accent-dark border-b-4 border-accent-light">
           {/* Header */}
           <div className="flex items-center gap-2">
