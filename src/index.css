@@ -20,7 +20,7 @@
   
   body {
     color: #2d080e;
-    background-color: #fbf7ef;
+    background-color: var(--bg-low);
   }
 
   #modal-container {

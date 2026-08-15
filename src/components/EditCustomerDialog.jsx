@@ -1,14 +1,16 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useCustomerData } from "./CustomerDataProvider";
 import { useToastNotification } from "./ToastNotification";
+import { NumberField } from "./NumberField";
 
 function EditCustomerDialog({ customerId, isOpen, onClose }) {
   const { customers, editCustomer } = useCustomerData();
-  const [currentCustomer, setCurrentCustomer] = useState(() => customers.find(item => item.id === customerId));
+
+  const currentCustomer = customers.find(customer => customer.id === customerId);
+
   const nameRef = useRef();
   const phoneRef = useRef();
-
   const qameezLengthRef = useRef();
   const qameezSleeveRef = useRef();
   const qameezShoulderRef = useRef();
@@ -18,12 +20,10 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
   const qameezHipRef = useRef();
   const qameezArmholeRef = useRef();
   const qameezCuffRef = useRef();
-
   const shalwaarLengthRef = useRef();
   const shalwaarHemRef = useRef();
   const shalwaarCircumferenceRef = useRef();
   const shalwaarRiseRef = useRef();
-
   const instructionsRef = useRef();
   const collarRef = useRef();
   const fittingRef = useRef();
@@ -31,12 +31,7 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
   const { showToastNotification } = useToastNotification();
 
   useEffect(() => {
-    const foundCustomer = customers.find(customer => customer.id === customerId);
-    setCurrentCustomer(foundCustomer);
-  }, [currentCustomer]);
-
-  useEffect(() => {
-    if (!isOpen || !currentCustomer) return;
+    if (!isOpen || !currentCustomer) return null;
 
     nameRef.current.value = currentCustomer.name;
     phoneRef.current.value = currentCustomer.phone;
@@ -56,57 +51,20 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
     instructionsRef.current.value = currentCustomer.instructions;
     collarRef.current.value = currentCustomer.collar;
     fittingRef.current.value = currentCustomer.fitting;
+
   }, [isOpen, currentCustomer]);
 
-  if (!isOpen) return;
+  if (!isOpen || !currentCustomer) return;
 
   function saveCustomerData(event) {
     event.preventDefault();
-    // console.log(nameRef.current.value)
-    // console.log(phoneRef.current.value)
-    // console.log(qameezLengthRef.current.value)
-    // console.log(qameezSleeveRef.current.value)
-    // console.log(qameezShoulderRef.current.value)
-    // console.log(qameezNeckRef.current.value)
-    // console.log(qameezChestRef.current.value)
-    // console.log(qameezWaistRef.current.value)
-    // console.log(qameezHipRef.current.value)
-    // console.log(qameezArmholeRef.current.value)
-    // console.log(qameezCuffRef.current.value)
-    // console.log(shalwaarLengthRef.current.value)
-    // console.log(shalwaarHemRef.current.value)
-    // console.log(shalwaarCircumferenceRef.current.value)
-    // console.log(shalwaarRiseRef.current.value)
-    // console.log(instructionsRef.current.value)
-    // console.log(collarRef.current.value)
-    // console.log(fittingRef.current.value)
-
-    if (
-      nameRef.current.value === "" ||
-      phoneRef.current.value === "" ||
-      qameezLengthRef.current.value === "" ||
-      qameezSleeveRef.current.value === "" ||
-      qameezShoulderRef.current.value === "" ||
-      qameezNeckRef.current.value === "" ||
-      qameezChestRef.current.value === "" ||
-      qameezWaistRef.current.value === "" ||
-      qameezHipRef.current.value === "" ||
-      qameezArmholeRef.current.value === "" ||
-      qameezCuffRef.current.value === "" ||
-      shalwaarLengthRef.current.value === "" ||
-      shalwaarHemRef.current.value === "" ||
-      shalwaarCircumferenceRef.current.value === "" ||
-      shalwaarRiseRef.current.value === "" ||
-      instructionsRef.current.value === ""
-    ) {
-      showToastNotification("Please fill all fields.");
-      return;
-    };
 
     const editedCustomer = {
       id: currentCustomer.id,
       name: nameRef.current.value,
       phone: phoneRef.current.value,
+      createdAt: currentCustomer.createdAt,
+      updatedAt: new Date(),
       qameez: {
         length: qameezLengthRef.current.value,
         sleeve: qameezSleeveRef.current.value,
@@ -128,29 +86,9 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
       collar: collarRef.current.value,
       fitting: fittingRef.current.value
     }
-
     editCustomer(customerId, editedCustomer);
     showToastNotification(`Updated measurements for: ${editedCustomer.name}`);
     onClose(); // Closes This Dialog
-
-    nameRef.current.value = "";
-    phoneRef.current.value = "";
-    qameezLengthRef.current.value = "";
-    qameezSleeveRef.current.value = "";
-    qameezShoulderRef.current.value = "";
-    qameezNeckRef.current.value = "";
-    qameezChestRef.current.value = "";
-    qameezWaistRef.current.value = "";
-    qameezHipRef.current.value = "";
-    qameezArmholeRef.current.value = "";
-    qameezCuffRef.current.value = "";
-    shalwaarLengthRef.current.value = "";
-    shalwaarHemRef.current.value = "";
-    shalwaarCircumferenceRef.current.value = "";
-    shalwaarRiseRef.current.value = "";
-    instructionsRef.current.value = "";
-    collarRef.current.value = "";
-    fittingRef.current.value = "";
   }
 
   return createPortal(
@@ -428,7 +366,6 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
                   id="instructions"
                   rows="4"
                   placeholder="e.g. Side zipper pocket on right, double stitching on collar, round cuff buttons..."
-                  required
                   className="px-2 py-2 text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent"></textarea>
               </div>
             </div>
@@ -453,35 +390,4 @@ function EditCustomerDialog({ customerId, isOpen, onClose }) {
     , document.querySelector("#modal-container"));
 }
 
-function NumberFieldRef({ titleEN, titleUR }, ref) {
-  return (
-    <div className="space-y-1 flex flex-col justify-end">
-      <label
-        htmlFor="collar-style"
-        className="text-xs font-medium">
-        {titleEN}
-        <span
-          dir="rtl"
-          className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-          ({titleUR})
-        </span>
-      </label>
-      <div className="w-full flex items-center text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
-        <input
-          ref={ref}
-          id="qameez-length-input"
-          type="number"
-          step="0.1"
-          placeholder="0.0"
-          required
-          className="w-full pl-2 py-1.5 bg-bg-high outline-none placeholder:font-semibold" />
-        <label
-          htmlFor="qameez-length-input"
-          className="pr-2 pl-1 font-medium select-none">in</label>
-      </div>
-    </div>
-  );
-}
-
-const NumberField = forwardRef(NumberFieldRef);
 export default EditCustomerDialog;

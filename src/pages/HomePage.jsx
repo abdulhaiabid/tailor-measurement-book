@@ -12,7 +12,6 @@ function HomePage() {
         <CustomerDataProvider>
           <Navbar />
           <Searchbar />
-          <CustomerContainer />
         </CustomerDataProvider>
       </ToastNotificationProvider>
     </>
