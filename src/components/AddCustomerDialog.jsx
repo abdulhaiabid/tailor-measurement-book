@@ -81,7 +81,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
         circumference: shalwaarCircumferenceRef.current.value,
         rise: shalwaarRiseRef.current.value
       },
-      instructions: instructionsRef.current.value,
+      instructions: instructionsRef.current.value.trim(),
       collar: collarRef.current.value,
       fitting: fittingRef.current.value
     }
@@ -300,13 +300,13 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                   required
                   className="w-full px-1 py-1.5 flex items-center text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
 
-                  <option value="ban-collar">
+                  <option value="Ban Collar">
                     Ban Collar (بین کالر)
                   </option>
-                  <option value="shirt-collar">
+                  <option value="Shirt Collar">
                     Shirt Collar (شرٹ کالر)
                   </option>
-                  <option value="maghzi-collar">
+                  <option value="Maghzi Collar">
                     Maghzi Collar (مغزی کالر)
                   </option>
                 </select>
@@ -330,13 +330,13 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                   id="fitting-preference"
                   required
                   className="w-full px-1 py-1.5 flex items-center text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
-                  <option value="normal-fit">
+                  <option value="Regular Fit">
                     Normal / Regular Fit (مناسب فٹنگ)
                   </option>
-                  <option value="slim-fit">
+                  <option value="Slim Fit">
                     Slim Fit (تنگ فٹنگ)
                   </option>
-                  <option value="loose-fit">
+                  <option value="Loose Fit">
                     Loose / Traditional Fit (کھلی فٹنگ)
                   </option>
                 </select>
