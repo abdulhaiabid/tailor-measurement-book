@@ -1,3 +1,5 @@
+import CustomerDataProvider from "../components/CustomerDataProvider";
+
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
 import CustomerContainer from "../components/CustomerContainer";
@@ -5,9 +7,11 @@ import CustomerContainer from "../components/CustomerContainer";
 function HomePage() {
   return (
     <>
-      <Navbar />
-      <Searchbar />
-      <CustomerContainer />
+      <CustomerDataProvider>
+        <Navbar />
+        <Searchbar />
+        <CustomerContainer />
+      </CustomerDataProvider>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddCustomerDialog from "./AddCustomerDialog";
 
 function Navbar() {
-  const [isAddCustomerDialogOpen, setIsAddCustomerDialogOpen] = useState(true);
+  const [isAddCustomerDialogOpen, setIsAddCustomerDialogOpen] = useState(false);
 
   function onAddCustomerDialogClose() {
     setIsAddCustomerDialogOpen(false);

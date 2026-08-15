@@ -1,7 +1,32 @@
-import { useEffect } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useCustomerData } from "./CustomerDataProvider";
 
 function AddCustomerDialog({ children, isOpen, onClose }) {
+  const nameRef = useRef();
+  const phoneRef = useRef();
+
+  const qameezLengthRef = useRef();
+  const qameezSleeveRef = useRef();
+  const qameezShoulderRef = useRef();
+  const qameezNeckRef = useRef();
+  const qameezChestRef = useRef();
+  const qameezWaistRef = useRef();
+  const qameezHipRef = useRef();
+  const qameezArmholeRef = useRef();
+  const qameezCuffRef = useRef();
+
+  const shalwaarLengthRef = useRef();
+  const shalwaarHemRef = useRef();
+  const shalwaarCircumferenceRef = useRef();
+  const shalwaarRiseRef = useRef();
+
+  const instructionsRef = useRef();
+  const collarRef = useRef();
+  const fittingRef = useRef();
+
+  const { addCustomer } = useCustomerData();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.height = "100dvh";
@@ -13,6 +38,58 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
   }, [isOpen]);
   if (!isOpen) return;
 
+  function saveCustomerData() {
+    if (
+      !nameRef &&
+      !phoneRef &&
+      !qameezLengthRef &&
+      !qameezSleeveRef &&
+      !qameezShoulderRef &&
+      !qameezNeckRef &&
+      !qameezChestRef &&
+      !qameezWaistRef &&
+      !qameezHipRef &&
+      !qameezArmholeRef &&
+      !qameezCuffRef &&
+      !shalwaarLengthRef &&
+      !shalwaarHemRef &&
+      !shalwaarCircumferenceRef &&
+      !shalwaarRiseRef &&
+      !instructionsRef &&
+      !collarRef &&
+      !fittingRef
+    ) return;
+
+    const newCustomer = {
+      id: crypto.randomUUID(),
+      name: nameRef.current.value,
+      phone: phoneRef.current.value,
+      qameez: {
+        length: qameezLengthRef.current.value,
+        sleeve: qameezSleeveRef.current.value,
+        shoulder: qameezShoulderRef.current.value,
+        neck: qameezNeckRef.current.value,
+        chest: qameezChestRef.current.value,
+        waist: qameezWaistRef.current.value,
+        hip: qameezHipRef.current.value,
+        armhole: qameezArmholeRef.current.value,
+        cuff: qameezCuffRef.current.value
+      },
+      shalwaar: {
+        length: shalwaarLengthRef.current.value,
+        hem: shalwaarHemRef.current.value,
+        circumference: shalwaarCircumferenceRef.current.value,
+        rise: shalwaarRiseRef.current.value
+      },
+      instructions: instructionsRef.current.value,
+      collar: collarRef.current.value,
+      fitting: fittingRef.current.value
+    }
+
+    addCustomer(newCustomer);
+    console.log("Save.");
+  }
+
   return createPortal(
     <>
       <div
@@ -22,7 +99,8 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
       <dialog
         open={isOpen}
         className={`h-[90%] w-[90%] top-1/2 left-1/2 -translate-1/2 flex flex-col shadow-[0_0_18px_0_rgba(0,0,0,0.2)] border-2 border-accent-light rounded-xl transition-[display,opacity] transition-discrete duration-300 overflow-hidden ${isOpen ? "fixed inset-0 opacity-100 " : "opacity-0 hidden"}`}>
-        <div className="p-3 flex justify-between items-center bg-accent-dark border-b-4 border-accent-light">
+        <div className="p-4 flex justify-between items-center bg-accent-dark border-b-4 border-accent-light">
+          {/* Header */}
           <div className="flex items-center gap-2">
             <div className="p-2 flex justify-center items-center text-accent-dark bg-accent-light rounded-xl">
               <span className="material-symbols-outlined select-none">
@@ -46,6 +124,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
           </button>
         </div>
 
+        {/* Body */}
         <div className="p-4 space-y-4 text-text-dark bg-bg-low overflow-y-auto">
           {/* Customer Information */}
           <div className="p-4 bg-bg-mid shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-lg">
@@ -56,8 +135,8 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Customer Information *
             </h2>
 
-            <div className="mt-4 space-y-2">
-              <div className="flex flex-col space-y-1">
+            <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2">
+              <div className="flex-1 flex flex-col space-y-1">
                 <label
                   htmlFor="name-input"
                   className="text-xs font-medium">
@@ -69,13 +148,15 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                   </span>*
                 </label>
                 <input
+                  ref={nameRef}
                   id="name-input"
                   type="text"
                   placeholder="e.g. Ali"
+                  required
                   className="px-2 py-1.5 text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent placeholder:text-sm" />
               </div>
 
-              <div className="flex flex-col space-y-1">
+              <div className="flex-1 flex flex-col space-y-1">
                 <label
                   htmlFor="phone-number-input"
                   className="text-xs font-medium">
@@ -87,9 +168,11 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                   </span>*
                 </label>
                 <input
+                  ref={phoneRef}
                   id="phone-number-input"
                   type="text"
                   placeholder="e.g. 0312-3456789"
+                  required
                   className="px-2 py-1.5 text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent placeholder:text-sm" />
               </div>
             </div>
@@ -105,40 +188,49 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Qameez Measurements *
             </h2>
 
-            <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 align-items-end gap-2">
               <NumberField
+                ref={qameezLengthRef}
                 titleEN={"Qameez Length"}
                 titleUR={"لمبائی"}
               />
               <NumberField
+                ref={qameezSleeveRef}
                 titleEN={"Sleeve Length"}
                 titleUR={"بازو"}
               />
               <NumberField
+                ref={qameezShoulderRef}
                 titleEN={"Shoulder"}
                 titleUR={"تیرا"}
               />
               <NumberField
+                ref={qameezNeckRef}
                 titleEN={"Neck"}
                 titleUR={"گلا"}
               />
               <NumberField
+                ref={qameezChestRef}
                 titleEN={"Chest"}
                 titleUR={"چھاتی"}
               />
               <NumberField
+                ref={qameezWaistRef}
                 titleEN={"Waist"}
                 titleUR={"کمر"}
               />
               <NumberField
+                ref={qameezHipRef}
                 titleEN={"Hip"}
                 titleUR={"کولھا"}
               />
               <NumberField
+                ref={qameezArmholeRef}
                 titleEN={"Arm Hole"}
                 titleUR={"مونڈا/بغل"}
               />
               <NumberField
+                ref={qameezCuffRef}
                 titleEN={"Cuff"}
                 titleUR={"کَف"}
               />
@@ -155,20 +247,24 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Shalwar Measurements *
             </h2>
 
-            <div className="mt-4 grid grid-cols-2 align-items-end gap-2">
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 align-items-end gap-2">
               <NumberField
+                ref={shalwaarLengthRef}
                 titleEN={"Shalwar Length"}
                 titleUR={"لمبائی"}
               />
               <NumberField
+                ref={shalwaarHemRef}
                 titleEN={"Bottom / Paincha"}
                 titleUR={"پائنچہ"}
               />
               <NumberField
+                ref={shalwaarCircumferenceRef}
                 titleEN={"Ghera / Circumference"}
                 titleUR={"گھیرہ"}
               />
               <NumberField
+                ref={shalwaarRiseRef}
                 titleEN={"Rise / Aasan"}
                 titleUR={"آسن"}
               />
@@ -184,7 +280,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
               Fitting Options & Extra Notes *
             </h2>
 
-            <div className="mt-4 space-y-2 grid grid-cols-1 gap-2">
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div className="flex flex-col space-y-1">
                 <label
                   htmlFor="collar-style"
@@ -198,35 +294,20 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                 </label>
 
                 <select
+                  ref={collarRef}
                   name="collar-style"
                   id="collar-style"
+                  required
                   className="w-full px-1 py-1.5 flex items-center text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
-                  {/* <option value="" disabled selected>
-                    Select an option
-                  </option> */}
+
                   <option value="ban-collar">
-                    Ban Collar
-                    <span
-                      dir="rtl"
-                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-                      (بین گلا)
-                    </span>
+                    Ban Collar (بین کالر)
                   </option>
                   <option value="shirt-collar">
-                    Shirt Collar
-                    <span
-                      dir="rtl"
-                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-                      (شرٹ کالر)
-                    </span>
+                    Shirt Collar (شرٹ کالر)
                   </option>
                   <option value="maghzi-collar">
-                    Maghzi Collar
-                    <span
-                      dir="rtl"
-                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-                      (مغزی کالر)
-                    </span>
+                    Maghzi Collar (مغزی کالر)
                   </option>
                 </select>
               </div>
@@ -244,37 +325,24 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                 </label>
 
                 <select
+                  ref={fittingRef}
                   name="fitting-preference"
                   id="fitting-preference"
+                  required
                   className="w-full px-1 py-1.5 flex items-center text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
                   <option value="normal-fit">
-                    Normal / Regular Fit
-                    <span
-                      dir="rtl"
-                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-                      (مناسب فٹنگ)
-                    </span>
+                    Normal / Regular Fit (مناسب فٹنگ)
                   </option>
                   <option value="slim-fit">
-                    Slim Fit
-                    <span
-                      dir="rtl"
-                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-                      (تنگ فٹنگ)
-                    </span>
+                    Slim Fit (تنگ فٹنگ)
                   </option>
                   <option value="loose-fit">
-                    Loose / Traditional Fit
-                    <span
-                      dir="rtl"
-                      className="mx-1 text-[0.65rem] leading-0 font-['Noto_Nastaliq_Urdu']">
-                      (کھلی فٹنگ)
-                    </span>
+                    Loose / Traditional Fit (کھلی فٹنگ)
                   </option>
                 </select>
               </div>
 
-              <div className="flex flex-col space-y-1">
+              <div className="sm:col-span-2 flex flex-col space-y-1">
                 <label
                   htmlFor="instructions"
                   className="text-xs font-medium">
@@ -287,10 +355,12 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
                 </label>
 
                 <textarea
+                  ref={instructionsRef}
                   name="instructions"
                   id="instructions"
                   rows="4"
                   placeholder="e.g. Side zipper pocket on right, double stitching on collar, round cuff buttons..."
+                  required
                   className="px-2 py-2 text-sm text-text-muted/90 bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none focus:ring-2 focus:ring-accent-light focus:border-transparent"></textarea>
               </div>
             </div>
@@ -299,9 +369,11 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
 
         {/* Saving Options */}
         <div className="px-4 py-3 flex justify-end items-center gap-2 bg-bg-low shadow-[0_0_8px_0_rgba(0,0,0,0.4)] border-t-4 border-bg-low">
-          <button className="px-6 py-1.5 flex justify-center items-center gap-1 text-text-light font-semibold bg-accent-light brightness-110 rounded-lg transition-[filter] duration-300 cursor-pointer hover:brightness-104">
+          <button
+            onClick={saveCustomerData}
+            className="px-6 py-1.5 flex justify-center items-center gap-1 text-text-light font-semibold bg-accent-light brightness-110 rounded-lg transition-[filter] duration-300 cursor-pointer hover:brightness-104">
             <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! select-none">
-              receipt
+              save
             </span>
             Save
           </button>
@@ -312,7 +384,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
     , document.querySelector("#modal-container"));
 }
 
-function NumberField({ titleEN, titleUR }) {
+function NumberFieldRef({ titleEN, titleUR }, ref) {
   return (
     <div className="space-y-1 flex flex-col justify-end">
       <label
@@ -327,6 +399,7 @@ function NumberField({ titleEN, titleUR }) {
       </label>
       <div className="w-full flex items-center text-sm bg-bg-high border border-accent-dark/20 rounded-lg transition-shadow duration-300 outline-none overflow-clip focus-within:ring-2 focus-within:ring-accent-light focus-within:border-transparent">
         <input
+          ref={ref}
           id="qameez-length-input"
           type="number"
           step="0.2"
@@ -340,4 +413,5 @@ function NumberField({ titleEN, titleUR }) {
   );
 }
 
+const NumberField = forwardRef(NumberFieldRef);
 export default AddCustomerDialog;
