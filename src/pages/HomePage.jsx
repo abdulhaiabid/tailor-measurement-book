@@ -1,3 +1,4 @@
+import ToastNotificationProvider from "../components/ToastNotification";
 import CustomerDataProvider from "../components/CustomerDataProvider";
 
 import Navbar from "../components/Navbar";
@@ -7,11 +8,13 @@ import CustomerContainer from "../components/CustomerContainer";
 function HomePage() {
   return (
     <>
-      <CustomerDataProvider>
-        <Navbar />
-        <Searchbar />
-        <CustomerContainer />
-      </CustomerDataProvider>
+      <ToastNotificationProvider>
+        <CustomerDataProvider>
+          <Navbar />
+          <Searchbar />
+          <CustomerContainer />
+        </CustomerDataProvider>
+      </ToastNotificationProvider>
     </>
   );
 }

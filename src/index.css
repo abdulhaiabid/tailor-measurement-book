@@ -126,7 +126,7 @@
 }
 
 @utility urdu {
-    @apply text-xs xs:text-sm;
+    @apply text-[0.65rem] xs:text-xs;
     font-family: "Noto Nastaliq Urdu", serif;
     direction: rtl;
 }

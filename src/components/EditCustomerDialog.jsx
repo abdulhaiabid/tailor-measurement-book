@@ -1,9 +1,11 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useCustomerData } from "./CustomerDataProvider";
 import { useToastNotification } from "./ToastNotification";
 
-function AddCustomerDialog({ children, isOpen, onClose }) {
+function EditCustomerDialog({ customerId, isOpen, onClose }) {
+  const { customers, editCustomer } = useCustomerData();
+  const [currentCustomer, setCurrentCustomer] = useState(() => customers.find(item => item.id === customerId));
   const nameRef = useRef();
   const phoneRef = useRef();
 
@@ -26,18 +28,36 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
   const collarRef = useRef();
   const fittingRef = useRef();
 
-  const { addCustomer } = useCustomerData();
   const { showToastNotification } = useToastNotification();
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.height = "100dvh";
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.height = "auto";
-      document.body.style.overflow = "auto";
-    }
-  }, [isOpen]);
+    const foundCustomer = customers.find(customer => customer.id === customerId);
+    setCurrentCustomer(foundCustomer);
+  }, [currentCustomer]);
+
+  useEffect(() => {
+    if (!isOpen || !currentCustomer) return;
+
+    nameRef.current.value = currentCustomer.name;
+    phoneRef.current.value = currentCustomer.phone;
+    qameezLengthRef.current.value = currentCustomer.qameez.length;
+    qameezSleeveRef.current.value = currentCustomer.qameez.sleeve;
+    qameezShoulderRef.current.value = currentCustomer.qameez.shoulder;
+    qameezNeckRef.current.value = currentCustomer.qameez.neck;
+    qameezChestRef.current.value = currentCustomer.qameez.chest;
+    qameezWaistRef.current.value = currentCustomer.qameez.waist;
+    qameezHipRef.current.value = currentCustomer.qameez.hip;
+    qameezArmholeRef.current.value = currentCustomer.qameez.armhole;
+    qameezCuffRef.current.value = currentCustomer.qameez.cuff;
+    shalwaarLengthRef.current.value = currentCustomer.shalwaar.length;
+    shalwaarHemRef.current.value = currentCustomer.shalwaar.hem;
+    shalwaarCircumferenceRef.current.value = currentCustomer.shalwaar.circumference;
+    shalwaarRiseRef.current.value = currentCustomer.shalwaar.rise;
+    instructionsRef.current.value = currentCustomer.instructions;
+    collarRef.current.value = currentCustomer.collar;
+    fittingRef.current.value = currentCustomer.fitting;
+  }, [isOpen, currentCustomer]);
+
   if (!isOpen) return;
 
   function saveCustomerData(event) {
@@ -83,8 +103,8 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
       return;
     };
 
-    const newCustomer = {
-      id: crypto.randomUUID(),
+    const editedCustomer = {
+      id: currentCustomer.id,
       name: nameRef.current.value,
       phone: phoneRef.current.value,
       qameez: {
@@ -109,8 +129,8 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
       fitting: fittingRef.current.value
     }
 
-    addCustomer(newCustomer);
-    showToastNotification(`Saved new customer: ${nameRef.current.value}`);
+    editCustomer(customerId, editedCustomer);
+    showToastNotification(`Updated measurements for: ${editedCustomer.name}`);
     onClose(); // Closes This Dialog
 
     nameRef.current.value = "";
@@ -147,12 +167,12 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
           <div className="flex items-center gap-2">
             <div className="p-2 flex justify-center items-center text-accent-dark bg-accent-light rounded-xl">
               <span className="material-symbols-outlined select-none">
-                person_add
+                edit
               </span>
             </div>
             <div className="flex flex-col">
               <h1 className="text-base sm:text-xl text-accent-light font-bold">
-                Add New Customer
+                Edit Customer
               </h1>
               <p className="text-xs text-bg-low/70">
                 Enter customer details & measurements
@@ -424,7 +444,7 @@ function AddCustomerDialog({ children, isOpen, onClose }) {
             <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! select-none">
               save
             </span>
-            Save
+            Save Changes
           </button>
         </div>
 
@@ -451,7 +471,7 @@ function NumberFieldRef({ titleEN, titleUR }, ref) {
           ref={ref}
           id="qameez-length-input"
           type="number"
-          step="0.2"
+          step="0.1"
           placeholder="0.0"
           required
           className="w-full pl-2 py-1.5 bg-bg-high outline-none placeholder:font-semibold" />
@@ -464,4 +484,4 @@ function NumberFieldRef({ titleEN, titleUR }, ref) {
 }
 
 const NumberField = forwardRef(NumberFieldRef);
-export default AddCustomerDialog;
+export default EditCustomerDialog;

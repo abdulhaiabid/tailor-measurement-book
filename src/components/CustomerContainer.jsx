@@ -1,22 +1,56 @@
+import { useState, useEffect } from "react";
 import { useCustomerData } from "./CustomerDataProvider";
+import EditCustomerDialog from "./EditCustomerDialog";
 
 function CustomerContainer() {
-  // const { customers } = useCustomerData();
+  const [isEditCustomerDialogOpen, setIsEditCustomerDialogOpen] = useState(false);
+  const [editCustomerId, setEditCustomerId] = useState(null);
+
+  useEffect(() => {
+    if (isEditCustomerDialogOpen) {
+      document.body.style.height = "100dvh";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.height = "auto";
+      document.body.style.overflow = "auto";
+    }
+  }, [isEditCustomerDialogOpen]);
+
   const { customers } = useCustomerData();
+
+  function onEditCustomerDialogClose() {
+    setIsEditCustomerDialogOpen(false);
+    setEditCustomerId(null);
+  }
+
   return (
     <section className="w-full px-4 py-2 bg-bg-low">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-4">
         {
           customers.map(customer => {
-            return <CustomerCard key={customer.id} {...customer} />
+            return (
+              <CustomerCard
+                key={customer.id}
+                setIsEditCustomerDialogOpen={setIsEditCustomerDialogOpen}
+                setEditCustomerId={setEditCustomerId}
+                {...customer} />
+            )
           })
+        }
+        {
+          isEditCustomerDialogOpen && (
+            <EditCustomerDialog
+              isOpen={isEditCustomerDialogOpen}
+              onClose={onEditCustomerDialogClose}
+              customerId={editCustomerId} />
+          )
         }
       </div>
     </section>
   );
 }
 
-function CustomerCard({ id, name, phone, qameez, shalwaar, instructions, collar, fitting }) {
+function CustomerCard({ id, name, phone, qameez, shalwaar, instructions, collar, fitting, setIsEditCustomerDialogOpen, setEditCustomerId }) {
   const { deleteCustomer } = useCustomerData();
   return (
     <div className="col-span-1 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl overflow-hidden">
@@ -49,7 +83,7 @@ function CustomerCard({ id, name, phone, qameez, shalwaar, instructions, collar,
             Qameez
           </h2>
           <table className="mt-1 w-full">
-            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-text-muted/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-bg-mid *:border *:border-accent-dark/20">
+            <tbody className="flex flex-col gap-2 text-xs xs:text-sm text-text-muted/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-bg-mid *:border *:border-accent-dark/20">
               <tr>
                 <td>Qameez Length
                   <span className="urdu" dir="rtl">(لمبائی) </span>:
@@ -117,7 +151,7 @@ function CustomerCard({ id, name, phone, qameez, shalwaar, instructions, collar,
             Shalwar
           </h2>
           <table className="mt-1 w-full">
-            <tbody className="flex flex-col gap-2 text-sm xs:text-base text-text-muted/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-bg-mid *:border *:border-accent-dark/20">
+            <tbody className="flex flex-col gap-2 text-xs xs:text-sm text-text-muted/80 *:py-1 *:px-3 *:sm:px-5 *:flex *:justify-between *:items-center *:rounded *:bg-bg-mid *:border *:border-accent-dark/20">
               <tr>
                 <td>Shalwar Length
                   <span className="urdu" dir="rtl">(لمبائی) </span>:
@@ -176,7 +210,12 @@ function CustomerCard({ id, name, phone, qameez, shalwaar, instructions, collar,
         </button>
 
         <div className="flex items-end gap-2">
-          <button className="flex justify-center items-center cursor-pointer">
+          <button
+            onClick={() => {
+              setIsEditCustomerDialogOpen(true);
+              setEditCustomerId(id);
+            }}
+            className="flex justify-center items-center cursor-pointer">
             <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-normal! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/10">
               edit
             </span>

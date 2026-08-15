@@ -1,8 +1,10 @@
 import { useState } from "react";
 import AddCustomerDialog from "./AddCustomerDialog";
+import { useToastNotification } from "./ToastNotification";
 
 function Navbar() {
   const [isAddCustomerDialogOpen, setIsAddCustomerDialogOpen] = useState(false);
+  const { showToastNotification } = useToastNotification();
 
   function onAddCustomerDialogClose() {
     setIsAddCustomerDialogOpen(false);
@@ -35,6 +37,15 @@ function Navbar() {
           </span>
           Add Customer
         </button>
+        {/* Temporary Button */}
+        {/* <button
+          onClick={() => showToastNotification("Hello, I'm a toast.")}
+          className="px-3 py-1 sm:py-1 flex justify-center items-center text-sm text-accent-dark font-semibold bg-accent-light rounded-lg transition-colors duration-300 cursor-pointer hover:bg-accent-light/80">
+          <span className="material-symbols-outlined text-xl! select-none">
+            add
+          </span>
+          Show Toast
+        </button> */}
         <AddCustomerDialog
           isOpen={isAddCustomerDialogOpen}
           onClose={onAddCustomerDialogClose}>
