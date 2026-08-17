@@ -198,9 +198,15 @@ const initialCustomers = [
 function CustomerDataProvider({ children }) {
   const [customers, setCustomers] = useState(() => {
     const savedCustomers = localStorage.getItem("customers");
-    console.log(savedCustomers)
-    return savedCustomers !== null
-      ? JSON.parse(savedCustomers)
+
+    if (!savedCustomers) {
+      return [...initialCustomers];
+    }
+
+    const parsedCustomers = JSON.parse(savedCustomers);
+
+    return parsedCustomers.length > 0
+      ? parsedCustomers
       : [...initialCustomers];
   });
   useEffect(() => {

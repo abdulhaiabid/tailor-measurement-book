@@ -14,12 +14,13 @@ function CustomerCard(
     collar,
     fitting,
     setIsEditCustomerDialogOpen,
-    setEditCustomerId
+    setEditCustomerId,
+    onReceipt
   }
 ) {
   const { deleteCustomer } = useCustomerData();
   return (
-    <div className="col-span-1 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl overflow-hidden">
+    <div className={`col-span-1 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl overflow-hidden`}>
       {/* Name, Phone and added date */}
       <div className="p-4 flex justify-between items-start bg-bg-mid">
         <div>
@@ -174,28 +175,30 @@ function CustomerCard(
 
       {/* Receipt, Edit and Delete Button */}
       <div className="p-4 flex justify-between items-center bg-bg-mid">
-        <button className="px-4 py-1 flex items-center gap-1 text-text-light font-semibold bg-accent-light brightness-110 rounded-lg transition-[filter] duration-300 cursor-pointer hover:brightness-104">
+        <button
+          onClick={onReceipt}
+          className="px-4 py-1 flex items-center gap-1 text-text-light font-semibold bg-accent-light brightness-110 rounded-lg transition-[filter] duration-300 cursor-pointer hover:brightness-104">
           <span className="material-symbols-outlined [font-variation-settings:'FILL'1] text-base! select-none">
             receipt
           </span>
           Receipt
         </button>
 
-        <div className="flex items-end gap-2">
+        <div className="flex items-end gap-1">
           <button
             onClick={() => {
               setIsEditCustomerDialogOpen(true);
               setEditCustomerId(id);
             }}
             className="flex justify-center items-center cursor-pointer">
-            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-normal! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/10">
+            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-light! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/7">
               edit
             </span>
           </button>
           <button
             onClick={() => deleteCustomer(id)}
             className="flex justify-center items-center cursor-pointer">
-            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-normal! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/10">
+            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-light! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/7">
               delete
             </span>
           </button>

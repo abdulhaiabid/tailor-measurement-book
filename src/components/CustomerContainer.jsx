@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import CustomerCard from "./CustomerCard";
 import EditCustomerDialog from "./EditCustomerDialog";
+import CustomerReceipt from "./CustomerReceipt";
 
 function CustomerContainer({ customers }) {
   const [isEditCustomerDialogOpen, setIsEditCustomerDialogOpen] = useState(false);
   const [editCustomerId, setEditCustomerId] = useState(null);
+  const [receiptCustomer, setReceiptCustomer] = useState(null);
 
   useEffect(() => {
     if (isEditCustomerDialogOpen) {
@@ -15,6 +17,31 @@ function CustomerContainer({ customers }) {
       document.body.style.overflow = "auto";
     }
   }, [isEditCustomerDialogOpen]);
+
+  useEffect(() => {
+    if (!receiptCustomer) return;
+
+    const printTimer = setTimeout(() => {
+      window.print();
+    }, 100);
+
+    return () => {
+      clearTimeout(printTimer);
+    }
+
+  }, [receiptCustomer]);
+
+  useEffect(() => {
+    function handleAfterPrint() {
+      setReceiptCustomer(null);
+    }
+
+    window.addEventListener("afterprint", handleAfterPrint);
+
+    return () => {
+      window.removeEventListener("afterprint", handleAfterPrint);
+    }
+  }, []);
 
   function onEditCustomerDialogClose() {
     setIsEditCustomerDialogOpen(false);
@@ -31,6 +58,7 @@ function CustomerContainer({ customers }) {
                 key={customer.id}
                 setIsEditCustomerDialogOpen={setIsEditCustomerDialogOpen}
                 setEditCustomerId={setEditCustomerId}
+                onReceipt={() => setReceiptCustomer(customer)}
                 {...customer} />
             )
           })
@@ -42,6 +70,9 @@ function CustomerContainer({ customers }) {
               onClose={onEditCustomerDialogClose}
               customerId={editCustomerId} />
           )
+        }
+        {
+          receiptCustomer && <CustomerReceipt customer={receiptCustomer} />
         }
       </div>
     </section>
