@@ -1,4 +1,5 @@
 import { useCustomerData } from "./CustomerDataProvider";
+import { useToastNotification } from "./ToastNotification";
 
 
 function CustomerCard(
@@ -19,6 +20,46 @@ function CustomerCard(
   }
 ) {
   const { deleteCustomer } = useCustomerData();
+  const { showToastNotification } = useToastNotification();
+
+  function handleShareButton() {
+    let text = `*TAILOR'S MEASUREMENT TICKET*\n`;
+    text += `---------------------------------\n`;
+    text += `*Customer:* ${name}\n`;
+    text += `*Phone:* ${phone}\n`;
+    text += `*Date:* ${new Date(updatedAt).toLocaleDateString("en-GB", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    })}\n\n`;
+
+    text += `*QAMEEZ MEASUREMENTS (inches):*\n`;
+    text += `- Length (لمبائی): ${qameez.length ? qameez.length : "N/A"}\n`
+    text += `- Sleeve (بازو): ${qameez.sleeve ? qameez.sleeve : "N/A"}\n`
+    text += `- Shoulder (تیرا): ${qameez.shoulder ? qameez.shoulder : "N/A"}\n`
+    text += `- Neck (گلا): ${qameez.neck ? qameez.neck : "N/A"}\n`
+    text += `- Chest (چھاتی): ${qameez.chest ? qameez.chest : "N/A"}\n`
+    text += `- Waist (کمر): ${qameez.waist ? qameez.waist : "N/A"}\n`
+    text += `- Hip (کولھا): ${qameez.hip ? qameez.hip : "N/A"}\n`
+    text += `- Armhole (مونڈا): ${qameez.armhole ? qameez.armhole : "N/A"}\n`
+    text += `- Cuff (کف): ${qameez.cuff ? qameez.cuff : "N/A"}\n`
+
+    text += `\n*SHALWAR MEASUREMENTS (inches):*\n`;
+    text += `- Length (لمبائی): ${shalwaar.length ? shalwaar.length : "N/A"}\n`;
+    text += `- Bottom / Hem (پائنچہ): ${shalwaar.hem ? shalwaar.hem : "N/A"}\n`;
+    text += `- Circumference (گھیرہ): ${shalwaar.circumference ? shalwaar.circumference : "N/A"}\n`;
+    text += `- Rise (آسن): ${shalwaar.rise ? shalwaar.rise : "N/A"}\n`;
+
+    text += `\n*Collar:* ${collar || 'N/A'} | *Fitting:* ${fitting || 'N/A'}\n`;
+    text += `*Notes:* ${instructions ? instructions : "N/A"}`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      showToastNotification('Measurement ticket copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy text:', err);
+      showToastNotification('Could not copy automatically');
+    });
+  }
   return (
     <div className={`col-span-1 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl overflow-hidden`}>
       {/* Name, Phone and added date */}
@@ -185,6 +226,13 @@ function CustomerCard(
         </button>
 
         <div className="flex items-end gap-1">
+          <button
+            onClick={handleShareButton}
+            className="flex justify-center items-center cursor-pointer">
+            <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-light! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/7">
+              share
+            </span>
+          </button>
           <button
             onClick={() => {
               setIsEditCustomerDialogOpen(true);

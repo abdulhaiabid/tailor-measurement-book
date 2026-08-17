@@ -44,7 +44,7 @@ function Searchbar() {
 
   return (
     <main>
-      <section className="px-4 py-2 pt-4 bg-bg-low">
+      <section className="px-4 py-2 pt-4 bg-bg-low print:hidden">
         <div className="max-w-7xl mx-auto p-4 flex flex-col gap-3 bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.2)] rounded-xl">
           {/* Search bar */}
           <div className="relative">

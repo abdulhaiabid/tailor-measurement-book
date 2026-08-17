@@ -3,7 +3,7 @@ function CustomerReceipt({ customer }) {
 
   return (
     <section className="receipt-print-area w-full px-4 py-2 bg-bg-low">
-      <div className="max-w-7xl mx-auto p-4 flex flex-col gap-4 border-3 ">
+      <div className="receipt max-w-7xl mx-auto p-4 flex flex-col gap-4 border-3 ">
         {/* Title */}
         <div className="py-4">
           <h1 className="text-2xl text-center font-bold">Tailor's Measurement Receipt</h1>
@@ -220,9 +220,9 @@ function CustomerReceipt({ customer }) {
           <h3 className="text-center font-semibold">
             Thank you for visiting our store
           </h3>
-          <p className="text-sm text-center">
+          {/* <p className="text-sm text-center">
             Please bring this ticket when picking up your garments.
-          </p>
+          </p> */}
         </div>
 
 

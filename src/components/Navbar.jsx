@@ -13,9 +13,13 @@ function Navbar() {
       <nav className="max-w-7xl mx-auto py-2 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
         <div className="flex items-center gap-2">
           <div className="p-2 flex justify-center items-center text-accent-dark bg-accent-light rounded-xl">
-            <span className="material-symbols-outlined [font-variation-settings:'FILL'1] select-none">
+            <img
+              src="icon-png.png"
+              alt="icon"
+              className="size-8" />
+            {/* <span className="material-symbols-outlined [font-variation-settings:'FILL'1] select-none">
               book_2
-            </span>
+            </span> */}
           </div>
           <div className="flex flex-col">
             <h1 className="text-base sm:text-xl font-bold">
