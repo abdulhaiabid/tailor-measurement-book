@@ -230,7 +230,7 @@ function CustomerCard(
             onClick={handleShareButton}
             className="flex justify-center items-center cursor-pointer">
             <span className="material-symbols-outlined p-1 text-accent-dark! leading-2 font-light! rounded-lg transition-colors duration-300 select-none hover:bg-accent-dark/7">
-              share
+              content_copy
             </span>
           </button>
           <button
