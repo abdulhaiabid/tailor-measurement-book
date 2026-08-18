@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import CustomerCard from "./CustomerCard";
 import EditCustomerDialog from "./EditCustomerDialog";
 import CustomerReceipt from "./CustomerReceipt";
@@ -9,12 +10,13 @@ function CustomerContainer({ customers }) {
   const [receiptCustomer, setReceiptCustomer] = useState(null);
 
   useEffect(() => {
-    if (isEditCustomerDialogOpen) {
-      document.body.style.height = "100dvh";
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.height = "auto";
-      document.body.style.overflow = "auto";
+    if (!isEditCustomerDialogOpen) return;
+
+    const orignalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = orignalOverflow;
     }
   }, [isEditCustomerDialogOpen]);
 
@@ -72,7 +74,10 @@ function CustomerContainer({ customers }) {
           )
         }
         {
-          receiptCustomer && <CustomerReceipt customer={receiptCustomer} />
+          receiptCustomer && createPortal(
+            <CustomerReceipt customer={receiptCustomer} />
+            , document.querySelector("#modal-container")
+          )
         }
       </div>
     </section>

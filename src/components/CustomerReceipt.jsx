@@ -3,7 +3,7 @@ function CustomerReceipt({ customer }) {
 
   return (
     <section className="receipt-print-area w-full px-4 py-2 bg-bg-low">
-      <div className="receipt max-w-7xl mx-auto p-4 flex flex-col gap-4 border-3 ">
+      <div className="receipt print:mx-[10mm] print:mt-[10mm] max-w-7xl mx-auto p-4 flex flex-col gap-4 border-3 ">
         {/* Title */}
         <div className="py-4">
           <h1 className="text-2xl text-center font-bold">Tailor's Measurement Receipt</h1>
@@ -16,11 +16,19 @@ function CustomerReceipt({ customer }) {
         <div className="flex justify-between items-center text-sm">
           <p className="flex items-center gap-2">
             Receipt ID:
-            <span className="font-mono font-semibold">#00001</span>
+            <span className="font-mono font-semibold">{crypto.randomUUID().slice(0, 8)}</span>
           </p>
           <p className="flex items-center gap-2">
             Date:
-            <span className="font-mono font-semibold">{new Date().toLocaleDateString()}</span>
+            <span className="font-mono font-semibold">
+              {
+                new Date().toLocaleDateString("en-GB", {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+                })
+              }
+            </span>
           </p>
         </div>
 
@@ -199,7 +207,7 @@ function CustomerReceipt({ customer }) {
             Instructions
           </h2>
           <p className="mt-2 flex-1 text-sm italic">
-            "{customer.instructions}"
+            "{customer.instructions ? customer.instructions : `No instructions...`}"
           </p>
           <div className="mt-4 flex items-center gap-1">
             <p className="px-3 py-1 text-xs text-text-light/80 font-semibold bg-accent-light/10 border border-accent-light/40 rounded">

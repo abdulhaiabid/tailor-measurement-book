@@ -48,10 +48,11 @@ function CustomerCard(
     text += `- Length (لمبائی): ${shalwaar.length ? `${shalwaar.length}″` : "N/A"}\n`;
     text += `- Bottom / Hem (پائنچہ): ${shalwaar.hem ? `${shalwaar.hem}″` : "N/A"}\n`;
     text += `- Circumference (گھیرہ): ${shalwaar.circumference ? `${shalwaar.circumference}″` : "N/A"}\n`;
-    text += `- Rise (آسن): ${shalwaar.rise ? `${shalwaar.rise}″` : "N/A"}\n`;
+    text += `- Rise (آسن): ${shalwaar.rise ? `${shalwaar.rise}″` : "N/A"}\n\n`;
 
-    text += `\n*Collar:* ${collar || 'N/A'} | *Fitting:* ${fitting || 'N/A'}\n`;
-    text += `*Notes:* ${instructions ? instructions : "N/A"}`;
+    text += `*Collar:* ${collar || 'N/A'}\n`
+    text += `*Fitting:* ${fitting || 'N/A'}\n`;
+    text += `*Notes:* ${instructions ? `_"${instructions}"_` : "N/A"}`;
 
     navigator.clipboard.writeText(text).then(() => {
       showToastNotification('Measurement ticket copied to clipboard!');
